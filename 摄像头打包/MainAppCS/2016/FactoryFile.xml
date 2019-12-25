@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FactoryFile</name>
+    </assembly>
+    <members>
+        <member name="T:FactoryFile.DataAccess">
+            <summary>
+            工厂类，返回对应的接口
+            </summary>
+        </member>
+        <member name="P:FactoryFile.DataAccess.FileManage">
+            <summary>
+            文件管理业务的接口实例
+            </summary>
+        </member>
+    </members>
+</doc>
