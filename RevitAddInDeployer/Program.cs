@@ -162,7 +162,7 @@ namespace RevitAddInDeployer
         /// <param name="section">节名称</param>
         /// <param name="key">属性Key值</param>
         /// <param name="retVal">属性Value值</param>
-        /// <param name="filePath"></param>
+        /// <param name="filePath">配置文件路径</param>
         /// <returns></returns>
         public static bool ReadParamINI(string section, string key, ref string retVal, string filePath)
         {
@@ -309,6 +309,7 @@ namespace RevitAddInDeployer
 
         static int Main(string[] args)
         {
+            //获取本机安装的所有Revit
             IList<RevitProduct> revitProductArray = RevitProductUtility.GetAllInstalledRevitProducts();
             if (args.Length == 0)
             {
