@@ -11,6 +11,16 @@ namespace RevitAddInDeployer
 {
     public class Program
     {
+        /// <summary>
+        /// 读取配置文件ini
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="key"></param>
+        /// <param name="def"></param>
+        /// <param name="retVal"></param>
+        /// <param name="size"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         [DllImport("kernel32")]
         public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
@@ -35,11 +45,18 @@ namespace RevitAddInDeployer
         public const string CONFIG_ARCH_X86 = "PathX86";
         public const string CONFIG_ARCH_X64 = "PathX64";
 
-
+        /// <summary>
+        /// 错误信息
+        /// </summary>
         public static List<string> ErrorMsgSet = new List<string>();
-
+        /// <summary>
+        /// 当前程序路径
+        /// </summary>
         public static string CurAppDir = "";
 
+        /// <summary>
+        /// 版本信息
+        /// </summary>
         public struct VersionInfo
         {
             public string appVersion;
@@ -47,17 +64,42 @@ namespace RevitAddInDeployer
             public string pathX64;
         };
 
+        /// <summary>
+        /// 配置文件信息
+        /// </summary>
         public struct AddInInfo
         {
+            /// <summary>
+            /// 插件类型（外部应用/外部命令）APP/CMD
+            /// </summary>
             public string addInType;
+            /// <summary>
+            /// 插件名称
+            /// </summary>
             public string addInName;
+            /// <summary>
+            /// 插件dll
+            /// </summary>
             public string addInAssemblyName;
+            /// <summary>
+            /// 程序入口类名
+            /// </summary>
             public string addInAssemblyFullClassName;
+            /// <summary>
+            /// 开发商ID
+            /// </summary>
             public string vendorId;
-
+            /// <summary>
+            /// AddIn文件名称
+            /// </summary>
             public string manifestFileName;
-
+            /// <summary>
+            /// 版本数量
+            /// </summary>
             public int versionCount;
+            /// <summary>
+            /// 版本列表
+            /// </summary>
             public List<VersionInfo> versionInfo;
 
             public void InitVersionInfo()
@@ -67,12 +109,24 @@ namespace RevitAddInDeployer
             }
         };
 
+        /// <summary>
+        /// AddIn文件路径信息
+        /// </summary>
         public struct DeployPath
         {
+            /// <summary>
+            /// Revit AddIn文件存储路径
+            /// </summary>
             public string addInFilePath;
+            /// <summary>
+            /// 插件dll路径
+            /// </summary>
             public string addInAssemblyPath;
         }
 
+        /// <summary>
+        /// AddIn文件信息
+        /// </summary>
         public struct DeployInfo
         {
             public int deployCount;
@@ -86,6 +140,9 @@ namespace RevitAddInDeployer
 
         };
 
+        /// <summary>
+        /// 错误信息输出到控制台
+        /// </summary>
         public static void ShowErrorMsg()
         {
             Console.WriteLine("发生错误,本次插件安装失败！");
@@ -99,7 +156,14 @@ namespace RevitAddInDeployer
             ErrorMsgSet.Clear();
         }
 
-
+        /// <summary>
+        /// 读取配置文件中属性值（键值对格式）
+        /// </summary>
+        /// <param name="section">节名称</param>
+        /// <param name="key">属性Key值</param>
+        /// <param name="retVal">属性Value值</param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static bool ReadParamINI(string section, string key, ref string retVal, string filePath)
         {
             int size = 260;
@@ -120,6 +184,12 @@ namespace RevitAddInDeployer
             return true;
         }
 
+        /// <summary>
+        /// 从配置文件读取相关信息
+        /// </summary>
+        /// <param name="iniFilePath"></param>
+        /// <param name="addInInfo"></param>
+        /// <returns></returns>
         public static bool GetAddInInfoFromINI(string iniFilePath, ref AddInInfo addInInfo)
         {
             if (!File.Exists(iniFilePath))
@@ -175,14 +245,20 @@ namespace RevitAddInDeployer
             }
         }
 
+        /// <summary>
+        /// 组织AddIn文件信息
+        /// </summary>
+        /// <param name="addInInfo"></param>
+        /// <param name="deployInfo"></param>
+        /// <returns></returns>
         public static bool GetAddInInfoFromProduct(AddInInfo addInInfo, ref DeployInfo deployInfo)
         {
+            //获取本机安装的所有Revit信息
             IList<RevitProduct> revitProductArray = RevitProductUtility.GetAllInstalledRevitProducts();
             if (0 == revitProductArray.Count)
             {
                 string msg = "在本机上未检测到任何Revit系列软件的安装！";
                 ErrorMsgSet.Add(msg);
-
                 return false;
             }
 
@@ -200,10 +276,11 @@ namespace RevitAddInDeployer
                 {
                     versionName = System.Enum.GetName(product.Version.GetType(), product.Version);
 
-                    if (versionName.Contains(versionInfo.appVersion))
+                    if (!string.IsNullOrEmpty(versionName) && versionName.Contains(versionInfo.appVersion))
                     {
+                        //根据配置文件中版本信息拼接AddIn文件存储路径
                         curDeployPath.addInFilePath = Path.Combine(product.AllUsersAddInFolder, addInInfo.manifestFileName);
-
+                        //拼接安装包解压的dll文件路径
                         if (AddInArchitecture.OS32bit == product.Architecture)
                         {
                             curDeployPath.addInAssemblyPath = Path.Combine(CurAppDir, versionInfo.pathX86, addInInfo.addInAssemblyName);
@@ -226,7 +303,6 @@ namespace RevitAddInDeployer
                 string msg = "在本机上未检测到符合当前需要安装版本的Revit系列软件！";
                 ErrorMsgSet.Add(msg);
             }
-
 
             return findProduct;
         }
@@ -262,6 +338,7 @@ namespace RevitAddInDeployer
                 AddInInfo addInInfo = new AddInInfo();
                 addInInfo.InitVersionInfo();
 
+                //读取配置文件信息
                 if (!GetAddInInfoFromINI(iniFilePath, ref addInInfo))
                 {
                     ShowErrorMsg();
@@ -296,12 +373,13 @@ namespace RevitAddInDeployer
                         string manifestPath = deployPath.addInFilePath;
 
                         RevitAddInManifest manifest = new RevitAddInManifest();
-
+                        //外部应用
                         if (addInInfo.addInType.ToLower().Equals("app"))
                         {
                             RevitAddInApplication addInApp = new RevitAddInApplication(addInName, addInAssemblyPath, Guid.NewGuid(), addInAssemblyFullClassName, vendorId);
                             manifest.AddInApplications.Add(addInApp);
                         }
+                        //外部命令
                         else if (addInInfo.addInType.ToLower().Equals("cmd"))
                         {
                             RevitAddInCommand addInCmd = new RevitAddInCommand(addInAssemblyPath, Guid.NewGuid(), addInAssemblyFullClassName, vendorId);
@@ -325,7 +403,8 @@ namespace RevitAddInDeployer
                                 if (product != null)
                                 {
                                     string curResPath = Path.Combine(product.InstallLocation, "ProjectResource.dll");
-                                    File.Copy(resPath, curResPath, true);
+                                    if (!File.Exists(curResPath))
+                                        File.Copy(resPath, curResPath, true);
                                 }
                             }
                             catch (Exception ex)
@@ -367,7 +446,7 @@ namespace RevitAddInDeployer
                                 if (product != null)
                                 {
                                     string curResPath = Path.Combine(product.InstallLocation, "ProjectResource.dll");
-                                    if (!File.Exists(curResPath))
+                                    if (File.Exists(curResPath))
                                     {
                                         File.Delete(curResPath);
                                     }
