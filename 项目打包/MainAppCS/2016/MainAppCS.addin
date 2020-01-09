@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>External Tool</Name>
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>a6f6f63f-855c-407f-8aa3-fa2471799f07</ClientId>
+    <FullClassName>MainAppCS.MainRun</FullClassName>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>30c5129d-0984-4a96-94fc-08178c53a877</ClientId>
+    <FullClassName>MainAppCS.Command.CmdEquipment</FullClassName>
+    <Text>CmdEquipment</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>280c46cc-231f-42e0-8b98-01e1d11bb641</ClientId>
+    <FullClassName>MainAppCS.Command.CmdItem</FullClassName>
+    <Text>CmdItem</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>9d4bdd1a-c90c-4137-9f28-47304103b157</ClientId>
+    <FullClassName>MainAppCS.Command.CmdOnlineMode</FullClassName>
+    <Text>CmdOnlineMode</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>04fb281e-3a48-4946-b1f2-c173f0282816</ClientId>
+    <FullClassName>MainAppCS.Command.CmdStandAloneMode</FullClassName>
+    <Text>CmdStandAloneMode</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>1344c157-5498-4f90-81c3-e335f6a2031c</ClientId>
+    <FullClassName>MainAppCS.Command.CmdStandard</FullClassName>
+    <Text>CmdStandard</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Assembly>MainAppCS.dll</Assembly>
+    <ClientId>504e485c-ad09-4f47-b662-7960478fbe19</ClientId>
+    <FullClassName>MainAppCS.Command.CmdTypeManage</FullClassName>
+    <Text>CmdTypeManage</Text>
+    <Description>""</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

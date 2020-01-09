@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ManagerQS</name>
+    </assembly>
+    <members>
+        <member name="M:ManagerQS.UpdateMgr.GetNewVersion">
+            <summary>
+            获取当前服务器中保存的新版本
+            updates.txt文件需放在IIS /Update/updates.txt位置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManagerQS.WebApiHelper">
+            <summary>
+            用于调用webapi的类
+            </summary>
+        </member>
+        <member name="F:ManagerQS.WebApiHelper.DESEncode">
+            <summary>
+            数据加密方法代理
+            </summary>
+        </member>
+        <member name="P:ManagerQS.WebApiHelper.ApiAddress">
+            <summary>
+            webapi 地址，不包含controller/action
+            </summary>
+        </member>
+        <member name="P:ManagerQS.WebApiHelper.DesKey">
+            <summary>
+            与服务端通信的秘钥
+            </summary>
+        </member>
+        <member name="M:ManagerQS.WebApiHelper.GetSecurityInfo">
+            <summary>
+            获取与服务端通信时加密的秘钥
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManagerQS.WebApiHelper.Post``1(System.String)">
+            <summary>
+            调用webapi指定接口的方法
+            </summary>
+            <typeparam name="TResult">返回值类型</typeparam>
+            <param name="actionName">接口名称（controller/action）</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagerQS.WebApiHelper.Post``1(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            调用webapi指定接口的方法
+            </summary>
+            <typeparam name="TResult">返回值类型</typeparam>
+            <param name="actionName">接口名称（controller/action）</param>
+            <param name="simpleParas">简单类型参数（键值对）</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagerQS.WebApiHelper.Post``1(System.String,System.Object)">
+            <summary>
+            调用webapi指定接口的方法
+            </summary>
+            <typeparam name="TResult">返回值类型</typeparam>
+            <param name="actionName">接口名称（controller/action）</param>
+            <param name="entData">要传输的实体数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagerQS.WebApiHelper.Post``1(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object)">
+            <summary>
+            调用webapi指定接口的方法
+            </summary>
+            <typeparam name="TResult">返回值类型</typeparam>
+            <param name="actionName">接口名称（controller/action）</param>
+            <param name="simpleParas">简单类型参数（键值对）</param>
+            <param name="entData">要传输的实体数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:ManagerQS.WebApiHelper.MsgResult">
+            <summary>
+            用于数据传输的类
+            </summary>
+        </member>
+        <member name="P:ManagerQS.WebApiHelper.MsgResult.State">
+            <summary>
+            状态：SUCCESS-api方法执行完成，FAILD-api方法执行失败,
+            </summary>
+        </member>
+        <member name="P:ManagerQS.WebApiHelper.MsgResult.Message">
+            <summary>
+            执行接口包含的信息
+            </summary>
+        </member>
+        <member name="P:ManagerQS.WebApiHelper.MsgResult.Data">
+            <summary>
+            api方法返回值
+            </summary>
+        </member>
+    </members>
+</doc>

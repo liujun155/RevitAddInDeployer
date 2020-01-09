@@ -387,7 +387,7 @@ namespace RevitAddInDeployer
                             addInCmd.Text = addInInfo.addInName;
                             manifest.AddInCommands.Add(addInCmd);
                         }
-
+                        //保存AddIn文件
                         manifest.SaveAs(manifestPath);
                     }
 
@@ -415,6 +415,22 @@ namespace RevitAddInDeployer
                             }
                         }
                     }
+                    //空族文件复制
+                    string rfaPath = Path.Combine(CurAppDir, "摄像机敷设范围.rfa");
+                    string rfaPath2 = Path.Combine(CurAppDir, "未敷设范围.rfa");
+                    string targetPath = @"D:\BIMAutoCreateCache\摄像机敷设范围.rfa";
+                    string targetPath2 = @"D:\BIMAutoCreateCache\未敷设范围.rfa";
+                    if (File.Exists(rfaPath))
+                    {
+                        if (File.Exists(targetPath)) File.Delete(targetPath);
+                        File.Copy(rfaPath, targetPath, true);
+                    }
+                    if (File.Exists(rfaPath2))
+                    {
+                        if (File.Exists(targetPath2)) File.Delete(targetPath2);
+                        File.Copy(rfaPath2, targetPath2, true);
+                    }
+
                     if (!string.IsNullOrEmpty(ermsg))
                         ShowErrorMsg();
                     #endregion

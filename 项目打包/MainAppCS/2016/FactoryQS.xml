@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FactoryQS</name>
+    </assembly>
+    <members>
+        <member name="T:FactoryQS.DataAccess">
+            <summary>
+            工厂类，返回对应的接口
+            </summary>
+        </member>
+        <member name="P:FactoryQS.DataAccess.Update">
+            <summary>
+            更新接口
+            </summary>
+        </member>
+        <member name="P:FactoryQS.DataAccess.Camera">
+            <summary>
+            余量配置接口
+            </summary>
+        </member>
+        <member name="P:FactoryQS.DataAccess.ProjectManager">
+            <summary>
+            项目管理接口
+            </summary>
+        </member>
+    </members>
+</doc>
